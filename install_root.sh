@@ -5,6 +5,31 @@
 apt-get update -y
 apt-get upgrade -y
 
+# Set container to unicode (important for Java)
+apt-get install -y locales
+sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+#echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+locale-gen en_US.UTF-8
+#dpkg-reconfigure --frontend=noninteractive locales
+#update-locale LANG=en_US.UTF-8
+#localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+#update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+#export LANG="en_US.UTF-8"
+#export LANGUAGE="en_US:en"
+#export LC_CTYPE="en_US.UTF-8"
+#export LC_NUMERIC="en_US.UTF-8"
+#export LC_TIME="en_US.UTF-8"
+#export LC_COLLATE="en_US.UTF-8"
+#export LC_MONETARY="en_US.UTF-8"
+#export LC_MESSAGES="en_US.UTF-8"
+#export LC_PAPER="en_US.UTF-8"
+#export LC_NAME="en_US.UTF-8"
+#export LC_ADDRESS="en_US.UTF-8"
+#export LC_TELEPHONE="en_US.UTF-8"
+#export LC_MEASUREMENT="en_US.UTF-8"
+#export LC_IDENTIFICATION="en_US.UTF-8"
+#export LC_ALL="en_US.UTF-8"
+
 # Install linux headers and compilers
 #apt-get install -y --assume-yes --no-install-recommends apt-utils
 apt-get install -y apt-utils
@@ -53,6 +78,8 @@ apt-get install -y golang-go
 
 # Install language : Haskell	ghc
 apt-get install -y ghc-dynamic
+ghc-pkg check
+ghc-pkg recache
 
 # Install language : Java		javap	java	javac
 # (the `mkdir` is a trick for the installer on man-less aka `slim` containers)
@@ -114,6 +141,7 @@ popd
 popd
 sed -i "s|/var/local/lib/isolate|/var/lib/isolate|" /etc/isolate
 groupadd isolate
+usermod -aG isolate mcmurphy
 chown -v root:isolate /usr/bin/isolate
 chmod -v u+s /usr/bin/isolate
 

@@ -10,15 +10,21 @@ Source : https://github.com/Kochise/docker-camisole
 Install `docker` :
 
 ```bash
+apt-get install -y docker
+```
+
+Compile the `image` :
+
+```bash
 docker pull library/debian:buster-slim
 docker build . --network host -t camisole
 ```
 
-Typical download/docker size is 3.7 GB.
+Typical download/image size is 3.7 GB.
 
 ## usage
 
-Run the `docker` :
+Run the `container` :
 
 ```bash
 docker run --network host -it --rm --privileged --detach camisole
@@ -28,6 +34,10 @@ Test `camisole` :
 
 ```bash
 curl http://localhost:42920/run -d '{"lang": "python", "source": "print(42)"}'
+
+curl http://localhost:42920/run -d '{"lang": "C", "source": "#include <stdio.h>\n int main() { printf(\"Hello World\"); return 0; }"}'
+
+curl http://localhost:42920/run -d '{"lang": "lua", "source": "print(\"Hello World\")"}'
 ```
 
 ## greetings
