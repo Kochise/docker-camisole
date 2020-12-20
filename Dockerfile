@@ -1,10 +1,14 @@
 FROM debian:buster-slim
 
 MAINTAINER David KOCH
+# https://docs.docker.com/engine/reference/builder/
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV container=docker
 ENV TZ=UTC
+
+SHELL ["/bin/bash", "-c", "-l"]
+#SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 #COPY userconf.sh /usr/local/bin/userconf.sh
 #COPY start.sh /usr/local/bin/start.sh
@@ -39,9 +43,6 @@ ENTRYPOINT ["camisole", "serve"]
 #ENTRYPOINT ["/bin/bash", "-c"]
 
 #CMD ["/bin/bash", "/usr/local/bin/start.sh"]
-
-SHELL ["/bin/bash", "-c"]
-#SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # --- bash help ----------------------------------------------------------------
 

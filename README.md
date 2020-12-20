@@ -5,6 +5,8 @@ Docker for `camisole`
 
 Source : https://github.com/Kochise/docker-camisole
 
+![docker-camisole](https://github.com/Kochise/docker-camisole/blob/master/docker-camisole_200.gif?raw=true)
+
 ## installation
 
 Install `docker` :

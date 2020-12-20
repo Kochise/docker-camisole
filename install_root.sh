@@ -7,13 +7,19 @@ apt-get upgrade -y
 
 # Set container to unicode (important for Java)
 apt-get install -y locales
+#apt-get install -y locales-all
+#rm -rf /var/lib/apt/lists/*
 sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
 #echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-locale-gen en_US.UTF-8
+locale-gen --purge en_US.UTF-8
 #dpkg-reconfigure --frontend=noninteractive locales
-#update-locale LANG=en_US.UTF-8
 #localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-#update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+#echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale
+#echo "LC_ALL=en_US.UTF-8" >> /etc/environment
+#echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+#echo "LANG=en_US.UTF-8" > /etc/locale.conf
+#update-locale LANG=en_US.UTF-8
+#update-locale LC_ALL=en_US.UTF-8
 #export LANG="en_US.UTF-8"
 #export LANGUAGE="en_US:en"
 #export LC_CTYPE="en_US.UTF-8"
@@ -45,7 +51,7 @@ apt-get install -y wget
 # Install language : Ada		gnatmake
 apt-get install -y gnat
 
-# Install language : C		gcc
+# Install language : C			gcc
 apt-get install -y gcc
 
 # Install language : C++		g++
@@ -55,7 +61,7 @@ apt-get install -y g++
 apt-get install -y mono-runtime
 apt-get install -y mono-mcs
 
-# Install language : D		dmd
+# Install language : D			dmd
 # `snap` doesn't work inside a container
 #apt-get install -y snapd
 #systemctl unmask snapd.service
@@ -73,7 +79,7 @@ apt-get -y --allow-unauthenticated install --reinstall d-apt-keyring
 apt-get update
 apt-get install -y dmd-compiler dub
 
-# Install language : Go		go
+# Install language : Go			go
 apt-get install -y golang-go
 
 # Install language : Haskell	ghc
